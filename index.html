@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEGIT FURNITURE - Premium Furniture Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f0ebe5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== FLOATING PRODUCTS BACKGROUND ===== */
+    .floating-products {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      opacity: 0.08;
+    }
+
+    .float-item {
+      position: absolute;
+      font-size: 4rem;
+      color: #5f3f28;
+      animation: floatAround 20s infinite linear;
+      opacity: 0.3;
+    }
+
+    .float-item:nth-child(1) { top: 5%; left: 5%; animation-duration: 22s; font-size: 5rem; }
+    .float-item:nth-child(2) { top: 15%; right: 8%; animation-duration: 18s; font-size: 4.5rem; animation-delay: -3s; }
+    .float-item:nth-child(3) { bottom: 20%; left: 10%; animation-duration: 25s; font-size: 6rem; animation-delay: -7s; }
+    .float-item:nth-child(4) { bottom: 30%; right: 5%; animation-duration: 20s; font-size: 4rem; animation-delay: -5s; }
+    .float-item:nth-child(5) { top: 45%; left: 3%; animation-duration: 28s; font-size: 5.5rem; animation-delay: -10s; }
+    .float-item:nth-child(6) { top: 60%; right: 3%; animation-duration: 23s; font-size: 4.8rem; animation-delay: -2s; }
+    .float-item:nth-child(7) { top: 25%; left: 45%; animation-duration: 30s; font-size: 7rem; animation-delay: -15s; }
+    .float-item:nth-child(8) { bottom: 5%; right: 45%; animation-duration: 26s; font-size: 4.2rem; animation-delay: -8s; }
+
+    @keyframes floatAround {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      25% { transform: translate(30px, -40px) rotate(90deg) scale(1.1); }
+      50% { transform: translate(-20px, 30px) rotate(180deg) scale(0.9); }
+      75% { transform: translate(40px, 20px) rotate(270deg) scale(1.05); }
+      100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+    }
+
+    /* ===== TOP HEADER ===== */
+    .top-header {
+      background: linear-gradient(135deg, #2c1810, #4a3228);
+      color: #fff;
+      padding: 0.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .top-header .contact-info {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .top-header .contact-info a {
+      color: #e6d5c8;
+      text-decoration: none;
+    }
+
+    .top-header .social-icons a {
+      color: #fff;
+      margin-left: 0.8rem;
+      font-size: 1.1rem;
+      transition: 0.3s;
+    }
+
+    .top-header .social-icons a:hover {
+      color: #d4a88c;
+      transform: scale(1.1);
+    }
+
+    /* ===== MAIN NAVIGATION ===== */
+    .main-nav {
+      background: #ffffff;
+      padding: 0.8rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #2c1810;
+      text-decoration: none;
+    }
+
+    .logo i {
+      color: #a67c5c;
+      font-size: 2.2rem;
+      animation: floatGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      color: #2c1810;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      background: #f0e6de;
+    }
+
+    .nav-links a.active {
+      background: #5f3f28;
+      color: #fff;
+    }
+
+    .nav-links a i {
+      margin-right: 0.4rem;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .user-actions .btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-login {
+      background: #f0e6de;
+      color: #2c1810;
+    }
+
+    .btn-login:hover {
+      background: #e0d2c6;
+    }
+
+    .btn-register {
+      background: #5f3f28;
+      color: #fff;
+    }
+
+    .btn-register:hover {
+      background: #4a3228;
+    }
+
+    .btn-logout {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .btn-logout:hover {
+      background: #c82333;
+    }
+
+    .user-greeting {
+      font-weight: 600;
+      color: #5f3f28;
+    }
+
+    /* ===== PAGE CONTENT ===== */
+    .page-content {
+      max-width: 1400px;
+      margin: 1.5rem auto;
+      padding: 0 5%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== HOME PAGE ===== */
+    .hero {
+      background: linear-gradient(135deg, #2c1810, #5f3f28);
+      color: #fff;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero .btn {
+      padding: 0.8rem 2.5rem;
+      background: #d4a88c;
+      color: #2c1810;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero .btn:hover {
+      transform: scale(1.05);
+      background: #e6c4b0;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-box {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid #e6ddd4;
+    }
+
+    .feature-box i {
+      font-size: 2.5rem;
+      color: #5f3f28;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-box h3 {
+      margin-bottom: 0.3rem;
+      color: #2c1810;
+    }
+
+    /* ===== PRODUCT GRID ===== */
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .products-header h2 {
+      color: #2c1810;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: 0.3s;
+      border: 1px solid #ede5dc;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #f5f0eb;
+    }
+
+    .product-card .product-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+
+    .product-card .product-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #2c1810;
+      margin-bottom: 0.2rem;
+    }
+
+    .product-card .product-price {
+      color: #5f3f28;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 0.3rem 0;
+    }
+
+    .product-card .product-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .product-card .product-actions button {
+      flex: 1;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-order {
+      background: #5f3f28;
+      color: #fff;
+    }
+
+    .btn-order:hover {
+      background: #4a3228;
+    }
+
+    .btn-details {
+      background: #f0e6de;
+      color: #2c1810;
+    }
+
+    .btn-details:hover {
+      background: #e0d2c6;
+    }
+
+    /* ===== ORDERS PAGE ===== */
+    .orders-list {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f0e6de;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item .order-details {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .order-item .order-status {
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-shipped {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .status-delivered {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    /* ===== ADMIN PANEL ===== */
+    .admin-panel {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .admin-panel h2 {
+      color: #2c1810;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: #f8f4f0;
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-card .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #5f3f28;
+    }
+
+    .stat-card .stat-label {
+      color: #7a6656;
+      font-weight: 500;
+    }
+
+    /* ===== CLIENTS TABLE (Admin) ===== */
+    .clients-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 2rem;
+      background: #f8f4f0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .clients-table th {
+      background: #5f3f28;
+      color: #fff;
+      padding: 0.8rem 1rem;
+      text-align: left;
+    }
+
+    .clients-table td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid #ede5dc;
+    }
+
+    .clients-table tr:hover {
+      background: #f0e8e0;
+    }
+
+    .contact-btn {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .contact-btn:hover {
+      background: #218838;
+    }
+
+    .admin-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: #f8f4f0;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-form input,
+    .admin-form select {
+      padding: 0.7rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #d6c4b8;
+      flex: 1 0 180px;
+      font-size: 0.95rem;
+      background: #fff;
+    }
+
+    .admin-form .btn {
+      padding: 0.7rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      background: #5f3f28;
+      color: #fff;
+    }
+
+    .admin-form .btn:hover {
+      background: #4a3228;
+    }
+
+    /* ===== AUTH MODALS ===== */
+    .auth-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .auth-modal.active {
+      display: flex;
+    }
+
+    .auth-box {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 24px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .auth-box .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #7a6656;
+      background: none;
+      border: none;
+    }
+
+    .auth-box h2 {
+      text-align: center;
+      color: #2c1810;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      margin: 0.5rem 0;
+      border-radius: 30px;
+      border: 1px solid #d6c4b8;
+      font-size: 1rem;
+    }
+
+    .auth-box .btn {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    .auth-box .btn-primary {
+      background: #5f3f28;
+      color: #fff;
+    }
+
+    .auth-box .btn-primary:hover {
+      background: #4a3228;
+    }
+
+    .auth-box .auth-switch {
+      text-align: center;
+      margin-top: 1rem;
+      color: #7a6656;
+    }
+
+    .auth-box .auth-switch span {
+      color: #5f3f28;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .auth-box .auth-error {
+      color: #dc3545;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== NOTIFICATION ===== */
+    .notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #2c1810;
+      color: #fff;
+      padding: 1rem 1.8rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 1000;
+      max-width: 400px;
+      animation: slideUp 0.3s ease;
+    }
+
+    .notification.show {
+      display: flex;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .notification .notif-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .top-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 0.5rem 1rem;
+      }
+
+      .top-header .contact-info {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .main-nav {
+        flex-direction: column;
+        padding: 0.8rem 1rem;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 0.2rem;
+      }
+
+      .nav-links a {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+
+      .admin-form {
+        flex-direction: column;
+      }
+
+      .admin-form input {
+        flex: 1 1 auto;
+      }
+
+      .notification {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+      }
+
+      .clients-table {
+        font-size: 0.8rem;
+      }
+      .clients-table th,
+      .clients-table td {
+        padding: 0.4rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== FLOATING PRODUCTS BACKGROUND ===== -->
+<div class="floating-products">
+  <div class="float-item"><i class="fas fa-couch"></i></div>
+  <div class="float-item"><i class="fas fa-chair"></i></div>
+  <div class="float-item"><i class="fas fa-bed"></i></div>
+  <div class="float-item"><i class="fas fa-table"></i></div>
+  <div class="float-item"><i class="fas fa-book"></i></div>
+  <div class="float-item"><i class="fas fa-door-open"></i></div>
+  <div class="float-item"><i class="fas fa-lamp"></i></div>
+  <div class="float-item"><i class="fas fa-crown"></i></div>
+</div>
+
+<!-- ===== TOP HEADER ===== -->
+<div class="top-header">
+  <div class="contact-info">
+    <a href="tel:+256701681381"><i class="fas fa-phone"></i> +256 701 681 381</a>
+    <span><i class="fas fa-map-marker-alt"></i> MUTOONGO-KIGO</span>
+  </div>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+  </div>
+</div>
+
+<!-- ===== MAIN NAV ===== -->
+<nav class="main-nav">
+  <a href="#" class="logo" onclick="showPage('home')">
+    <i class="fas fa-crown"></i>
+    <span>LEGIT FURNITURE</span>
+  </a>
+
+  <div class="nav-links">
+    <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
+    <a href="#" data-page="products"><i class="fas fa-th-list"></i> Products</a>
+    <a href="#" data-page="orders"><i class="fas fa-shopping-bag"></i> Orders</a>
+    <a href="#" data-page="admin" id="adminNav"><i class="fas fa-user-cog"></i> Admin</a>
+  </div>
+
+  <div class="user-actions" id="userActions">
+    <span class="user-greeting" id="userGreeting" style="display:none;"></span>
+    <button class="btn btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <button class="btn btn-register" id="registerBtn"><i class="fas fa-user-plus"></i> Register</button>
+    <button class="btn btn-logout" id="logoutBtn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</nav>
+
+<!-- ===== PAGE CONTENT ===== -->
+<div class="page-content">
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <h1>Premium Furniture for Your Home</h1>
+      <p>Discover handcrafted furniture that blends elegance with durability. Made with passion in MUTOONGO-KIGO.</p>
+      <button class="btn" onclick="showPage('products')"><i class="fas fa-shopping-bag"></i> Shop Now</button>
+    </div>
+
+    <div class="features">
+      <div class="feature-box">
+        <i class="fas fa-truck"></i>
+        <h3>Free Delivery</h3>
+        <p>Within MUTOONGO-KIGO area</p>
+      </div>
+      <div class="feature-box">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Quality Guarantee</h3>
+        <p>1-year warranty on all products</p>
+      </div>
+      <div class="feature-box">
+        <i class="fas fa-hand-holding-usd"></i>
+        <h3>Best Prices</h3>
+        <p>Direct from the workshop</p>
+      </div>
+      <div class="feature-box">
+        <i class="fas fa-clock"></i>
+        <h3>Fast Response</h3>
+        <p>Same-day order processing</p>
+      </div>
+    </div>
+
+    <h2 style="margin: 2rem 0 1rem; color: #2c1810;">Featured Products</h2>
+    <div class="product-grid" id="featuredProducts"></div>
+  </div>
+
+  <!-- PRODUCTS PAGE -->
+  <div class="page" id="page-products">
+    <div class="products-header">
+      <h2><i class="fas fa-couch" style="color: #a67c5c;"></i> All Products</h2>
+      <span id="productCount" style="color: #7a6656;">0 products</span>
+    </div>
+    <div class="product-grid" id="allProducts"></div>
+  </div>
+
+  <!-- ORDERS PAGE -->
+  <div class="page" id="page-orders">
+    <h2><i class="fas fa-clipboard-list" style="color: #a67c5c;"></i> My Orders</h2>
+    <div class="orders-list" id="ordersList">
+      <p style="color: #7a6656; text-align: center; padding: 2rem 0;">
+        <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+        No orders yet. Start shopping!
+      </p>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div class="page" id="page-admin">
+    <div class="admin-panel">
+      <h2><i class="fas fa-shield-alt" style="color: #a67c5c;"></i> Admin Dashboard</h2>
+      
+      <div class="admin-stats">
+        <div class="stat-card">
+          <div class="stat-number" id="totalProducts">0</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalOrders">0</div>
+          <div class="stat-label">Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalClients">0</div>
+          <div class="stat-label">Clients</div>
+        </div>
+      </div>
+
+      <!-- CLIENTS TABLE -->
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;">
+        <i class="fas fa-users" style="color: #a67c5c;"></i> Clients Details
+      </h3>
+      <div style="overflow-x: auto;">
+        <table class="clients-table" id="clientsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Orders</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="clientsTableBody">
+            <tr><td colspan="6" style="text-align: center; color: #7a6656;">No clients registered yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;"><i class="fas fa-plus-circle"></i> Add New Product</h3>
+      <div class="admin-form">
+        <input type="text" id="productName" placeholder="Product Name" />
+        <input type="text" id="productPrice" placeholder="Price (e.g. 850,000 UGX)" />
+        <input type="file" id="productImage" accept="image/*" />
+        <button class="btn" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+      </div>
+
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;"><i class="fas fa-list"></i> Manage Products</h3>
+      <div id="adminProductList" style="display: grid; gap: 0.5rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AUTH MODALS ===== -->
+<!-- Login Modal -->
+<div class="auth-modal" id="loginModal">
+  <div class="auth-box">
+    <button class="close-btn" onclick="closeAuthModal('loginModal')">&times;</button>
+    <h2><i class="fas fa-sign-in-alt" style="color: #a67c5c;"></i> Login</h2>
+    <input type="text" id="loginUsername" placeholder="Username" />
+    <input type="password" id="loginPassword" placeholder="Password" />
+    <div class="auth-error" id="loginError"></div>
+    <button class="btn btn-primary" id="loginSubmitBtn">Login</button>
+    <div class="auth-switch">
+      Don't have an account? <span onclick="switchAuth('register')">Register</span>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="auth-modal" id="registerModal">
+  <div class="auth-box">
+    <button class="close-btn" onclick="closeAuthModal('registerModal')">&times;</button>
+    <h2><i class="fas fa-user-plus" style="color: #a67c5c;"></i> Register</h2>
+    <input type="text" id="registerName" placeholder="Full Name" />
+    <input type="text" id="registerUsername" placeholder="Username" />
+    <input type="password" id="registerPassword" placeholder="Password" />
+    <input type="password" id="registerConfirm" placeholder="Confirm Password" />
+    <input type="text" id="registerPhone" placeholder="Phone Number (e.g. 0701681381)" />
+    <input type="email" id="registerEmail" placeholder="Email (optional)" />
+    <div class="auth-error" id="registerError"></div>
+    <button class="btn btn-primary" id="registerSubmitBtn">Create Account</button>
+    <div class="auth-switch">
+      Already have an account? <span onclick="switchAuth('login')">Login</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NOTIFICATION ===== -->
+<div class="notification" id="notification">
+  <i class="fas fa-info-circle" id="notifIcon"></i>
+  <span id="notifMessage">Notification</span>
+  <button class="notif-close" onclick="hideNotification()">&times;</button>
+</div>
+
+<script>
+// ============================================================
+//  COMPLETE APPLICATION LOGIC
+// ============================================================
+
+// ----- DATA STORE -----
+let products = [
+  { id: 1, name: 'Classic Sofa', price: '850,000 UGX', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop' },
+  { id: 2, name: 'Dining Table', price: '1,200,000 UGX', image: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?w=400&h=300&fit=crop' },
+  { id: 3, name: 'Luxury Bed', price: '1,500,000 UGX', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop' },
+  { id: 4, name: 'Bookshelf', price: '620,000 UGX', image: 'https://images.unsplash.com/photo-1597019558926-3a6d8b9b2b7b?w=400&h=300&fit=crop' },
+  { id: 5, name: 'Office Chair', price: '350,000 UGX', image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=400&h=300&fit=crop' },
+  { id: 6, name: 'Wardrobe', price: '2,100,000 UGX', image: 'https://images.unsplash.com/photo-1597000166855-3aa2e3b5a3f2?w=400&h=300&fit=crop' }
+];
+
+let orders = [];
+let users = [
+  { id: 1, name: 'Admin', username: 'admin', password: 'admin123', role: 'admin', phone: '+256701681381', email: 'admin@legitfurniture.ug' }
+];
+let currentUser = null;
+let nextProductId = 7;
+let nextOrderId = 1;
+
+// ----- DOM REFS -----
+const pages = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('.nav-links a');
+const productGrids = {
+  featured: document.getElementById('featuredProducts'),
+  all: document.getElementById('allProducts')
+};
+const ordersList = document.getElementById('ordersList');
+const adminProductList = document.getElementById('adminProductList');
+const clientsTableBody = document.getElementById('clientsTableBody');
+
+// ----- NOTIFICATION -----
+function showNotification(message, type = 'info') {
+  const notif = document.getElementById('notification');
+  const icon = document.getElementById('notifIcon');
+  const msg = document.getElementById('notifMessage');
+  
+  msg.textContent = message;
+  icon.className = type === 'success' ? 'fas fa-check-circle' : 
+                   type === 'error' ? 'fas fa-exclamation-circle' : 
+                   'fas fa-info-circle';
+  notif.className = 'notification show';
+  
+  setTimeout(() => hideNotification(), 5000);
+}
+
+function hideNotification() {
+  document.getElementById('notification').className = 'notification';
+}
+
+// ----- PAGE NAVIGATION -----
+function showPage(pageName) {
+  // Hide all pages
+  pages.forEach(p => p.classList.remove('active'));
+  navLinks.forEach(l => l.classList.remove('active'));
+  
+  // Show target page
+  const targetPage = document.getElementById(`page-${pageName}`);
+  if (targetPage) targetPage.classList.add('active');
+  
+  // Update nav
+  const navLink = document.querySelector(`.nav-links a[data-page="${pageName}"]`);
+  if (navLink) navLink.classList.add('active');
+  
+  // Check admin access
+  if (pageName === 'admin' && (!currentUser || currentUser.role !== 'admin')) {
+    showNotification('⚠️ Admin access required. Please login as admin.', 'error');
+    showPage('home');
+    return;
+  }
+  
+  // Render content
+  if (pageName === 'home') renderFeaturedProducts();
+  if (pageName === 'products') renderAllProducts();
+  if (pageName === 'orders') renderOrders();
+  if (pageName === 'admin') renderAdmin();
+}
+
+// ----- RENDER PRODUCTS -----
+function renderFeaturedProducts() {
+  const grid = productGrids.featured;
+  grid.innerHTML = products.slice(0, 4).map(p => createProductCard(p)).join('');
+}
+
+function renderAllProducts() {
+  const grid = productGrids.all;
+  grid.innerHTML = products.map(p => createProductCard(p)).join('');
+  document.getElementById('productCount').textContent = `${products.length} products`;
+}
+
+function createProductCard(product) {
+  return `
+    <div class="product-card">
+      <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x300/eee5dd/8b6b55?text=+'">
+      <div class="product-info">
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">${product.price}</div>
+        <div class="product-actions">
+          <button class="btn-order" onclick="placeOrder(${product.id})"><i class="fas fa-shopping-cart"></i> Order</button>
+          <button class="btn-details"><i class="fas fa-info-circle"></i></button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ----- PLACE ORDER -----
+function placeOrder(productId) {
+  if (!currentUser) {
+    showNotification('⚠️ Please login to place an order.', 'error');
+    document.getElementById('loginModal').classList.add('active');
+    return;
+  }
+  
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  
+  const order = {
+    id: nextOrderId++,
+    productId: product.id,
+    productName: product.name,
+    price: product.price,
+    image: product.image,
+    client: currentUser.name,
+    clientId: currentUser.id,
+    clientPhone: currentUser.phone || 'N/A',
+    date: new Date().toLocaleString(),
+    status: 'pending'
+  };
+  
+  orders.push(order);
+  renderOrders();
+  showNotification(`✅ Order placed: ${product.name} (${product.price})`, 'success');
+  
+  // Admin notification (console)
+  console.log('[ADMIN NOTIFICATION] New order from', currentUser.name, 'for', product.name);
+}
+
+// ----- RENDER ORDERS -----
+function renderOrders() {
+  if (orders.length === 0) {
+    ordersList.innerHTML = `
+      <p style="color: #7a6656; text-align: center; padding: 2rem 0;">
+        <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+        No orders yet. Start shopping!
+      </p>
+    `;
+    return;
+  }
+  
+  const userOrders = currentUser && currentUser.role === 'admin' ? orders : orders.filter(o => o.clientId === currentUser?.id);
+  
+  if (userOrders.length === 0) {
+    ordersList.innerHTML = `
+      <p style="color: #7a6656; text-align: center; padding: 2rem 0;">
+        <i class="fas fa-box-open" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+        You have no orders yet.
+      </p>
+    `;
+    return;
+  }
+  
+  ordersList.innerHTML = userOrders.map(o => `
+    <div class="order-item">
+      <div class="order-details">
+        <img src="${o.image}" alt="${o.productName}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'">
+        <div>
+          <strong>${o.productName}</strong><br>
+          <span style="color: #7a6656; font-size: 0.85rem;">${o.price}</span>
+          ${currentUser?.role === 'admin' ? `<br><span style="font-size: 0.8rem; color: #5f3f28;">Client: ${o.client} (${o.clientPhone})</span>` : ''}
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <span style="font-size: 0.85rem; color: #7a6656;">${o.date}</span>
+        <span class="order-status status-${o.status}">${o.status}</span>
+        ${currentUser?.role === 'admin' ? `
+          <select onchange="updateOrderStatus(${o.id}, this.value)" style="padding: 0.2rem 0.5rem; border-radius: 20px; border: 1px solid #d6c4b8;">
+            <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
+            <option value="shipped" ${o.status === 'shipped' ? 'selected' : ''}>Shipped</option>
+            <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+          </select>
+        ` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateOrderStatus(orderId, status) {
+  const order = orders.find(o => o.id === orderId);
+  if (order) {
+    order.status = status;
+    renderOrders();
+    showNotification(`✅ Order #${orderId} updated to ${status}`, 'success');
+  }
+}
+
+// ----- ADMIN PANEL -----
+function renderAdmin() {
+  if (!currentUser || currentUser.role !== 'admin') {
+    document.getElementById('page-admin').innerHTML = `
+      <div class="admin-panel" style="text-align: center; padding: 3rem;">
+        <i class="fas fa-lock" style="font-size: 3rem; color: #a67c5c; margin-bottom: 1rem;"></i>
+        <h2>Admin Access Required</h2>
+        <p style="color: #7a6656;">Please login with admin credentials.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  // Update stats
+  document.getElementById('totalProducts').textContent = products.length;
+  document.getElementById('totalOrders').textContent = orders.length;
+  document.getElementById('totalClients').textContent = users.filter(u => u.role === 'client').length;
+  
+  // Render clients table
+  renderClientsTable();
+  
+  // Render product management list
+  adminProductList.innerHTML = products.map(p => `
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; background: #f8f4f0; border-radius: 8px; margin-bottom: 0.3rem;">
+      <span><strong>${p.name}</strong> - ${p.price}</span>
+      <button onclick="deleteProduct(${p.id})" style="background: #dc3545; color: #fff; border: none; padding: 0.2rem 0.8rem; border-radius: 20px; cursor: pointer;">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  `).join('');
+}
+
+function renderClientsTable() {
+  const clients = users.filter(u => u.role === 'client');
+  if (clients.length === 0) {
+    clientsTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #7a6656;">No clients registered yet</td></tr>`;
+    return;
+  }
+  
+  clientsTableBody.innerHTML = clients.map(c => {
+    const orderCount = orders.filter(o => o.clientId === c.id).length;
+    return `
+      <tr>
+        <td><strong>${c.name}</strong></td>
+        <td>${c.username}</td>
+        <td>${c.phone || 'N/A'}</td>
+        <td>${c.email || 'N/A'}</td>
+        <td>${orderCount}</td>
+        <td>
+          ${c.phone && c.phone !== 'N/A' ? `<button class="contact-btn" onclick="contactClient('${c.phone}', '${c.name}')"><i class="fas fa-phone"></i> Call</button>` : 'N/A'}
+          ${c.phone && c.phone !== 'N/A' ? `<button class="contact-btn" style="background: #17a2b8;" onclick="smsClient('${c.phone}', '${c.name}')"><i class="fas fa-sms"></i> SMS</button>` : ''}
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ----- CONTACT FUNCTIONS -----
+function contactClient(phone, name) {
+  if (phone && phone !== 'N/A') {
+    window.location.href = `tel:${phone.replace(/\s/g, '')}`;
+    showNotification(`📞 Calling ${name}...`, 'success');
+  } else {
+    showNotification('⚠️ No phone number available', 'error');
+  }
+}
+
+function smsClient(phone, name) {
+  if (phone && phone !== 'N/A') {
+    window.location.href = `sms:${phone.replace(/\s/g, '')}?body=Hello ${name}, this is LEGIT FURNITURE. We have an update regarding your order.`;
+    showNotification(`📱 SMS to ${name}...`, 'success');
+  } else {
+    showNotification('⚠️ No phone number available', 'error');
+  }
+}
+
+function deleteProduct(productId) {
+  if (!confirm('Delete this product?')) return;
+  products = products.filter(p => p.id !== productId);
+  renderAdmin();
+  renderAllProducts();
+  renderFeaturedProducts();
+  showNotification('✅ Product deleted', 'success');
+}
+
+// ----- ADD PRODUCT (Admin) -----
+document.getElementById('addProductBtn').addEventListener('click', function() {
+  if (!currentUser || currentUser.role !== 'admin') {
+    showNotification('⚠️ Admin access required', 'error');
+    return;
+  }
+  
+  const name = document.getElementById('productName').value.trim();
+  const price = document.getElementById('productPrice').value.trim();
+  const file = document.getElementById('productImage').files[0];
+  
+  if (!name || !price) {
+    showNotification('⚠️ Please fill in all fields', 'error');
+    return;
+  }
+  
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      products.push({
+        id: nextProductId++,
+        name: name,
+        price: price,
+        image: e.target.result
+      });
+      resetAdminForm();
+      refreshAll();
+      showNotification(`✅ Product "${name}" added with image`, 'success');
+    };
+    reader.readAsDataURL(file);
+  } else {
+    products.push({
+      id: nextProductId++,
+      name: name,
+      price: price,
+      image: 'https://via.placeholder.com/400x300/eee5dd/8b6b55?text=+'
+    });
+    resetAdminForm();
+    refreshAll();
+    showNotification(`✅ Product "${name}" added`, 'success');
+  }
+});
+
+function resetAdminForm() {
+  document.getElementById('productName').value = '';
+  document.getElementById('productPrice').value = '';
+  document.getElementById('productImage').value = '';
+}
+
+function refreshAll() {
+  renderFeaturedProducts();
+  renderAllProducts();
+  renderOrders();
+  renderAdmin();
+}
+
+// ----- AUTH SYSTEM -----
+function switchAuth(mode) {
+  document.getElementById('loginModal').classList.remove('active');
+  document.getElementById('registerModal').classList.remove('active');
+  if (mode === 'login') {
+    document.getElementById('loginModal').classList.add('active');
+  } else {
+    document.getElementById('registerModal').classList.add('active');
+  }
+}
+
+function closeAuthModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+// Login
+document.getElementById('loginSubmitBtn').addEventListener('click', function() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  const errorEl = document.getElementById('loginError');
+  
+  const user = users.find(u => u.username === username && u.password === password);
+  if (user) {
+    currentUser = user;
+    closeAuthModal('loginModal');
+    updateUI();
+    showNotification(`👋 Welcome back, ${user.name}!`, 'success');
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginPassword').value = '';
+    errorEl.textContent = '';
+  } else {
+    errorEl.textContent = '❌ Invalid username or password';
+  }
+});
+
+// Register
+document.getElementById('registerSubmitBtn').addEventListener('click', function() {
+  const name = document.getElementById('registerName').value.trim();
+  const username = document.getElementById('registerUsername').value.trim();
+  const password = document.getElementById('registerPassword').value.trim();
+  const confirm = document.getElementById('registerConfirm').value.trim();
+  const phone = document.getElementById('registerPhone').value.trim();
+  const email = document.getElementById('registerEmail').value.trim();
+  const errorEl = document.getElementById('registerError');
+  
+  if (!name || !username || !password || !confirm) {
+    errorEl.textContent = '❌ Please fill in all required fields';
+    return;
+  }
+  if (password !== confirm) {
+    errorEl.textContent = '❌ Passwords do not match';
+    return;
+  }
+  if (users.find(u => u.username === username)) {
+    errorEl.textContent = '❌ Username already exists';
+    return;
+  }
+  
+  users.push({
+    id: users.length + 1,
+    name: name,
+    username: username,
+    password: password,
+    role: 'client',
+    phone: phone || 'N/A',
+    email: email || 'N/A'
+  });
+  
+  closeAuthModal('registerModal');
+  showNotification(`✅ Account created! Please login.`, 'success');
+  document.getElementById('registerName').value = '';
+  document.getElementById('registerUsername').value = '';
+  document.getElementById('registerPassword').value = '';
+  document.getElementById('registerConfirm').value = '';
+  document.getElementById('registerPhone').value = '';
+  document.getElementById('registerEmail').value = '';
+  errorEl.textContent = '';
+  
+  // Open login modal
+  document.getElementById('loginModal').classList.add('active');
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  currentUser = null;
+  updateUI();
+  showNotification('👋 Logged out successfully', 'info');
+  showPage('home');
+});
+
+// Enter key support
+document.getElementById('loginPassword').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('loginSubmitBtn').click();
+});
+document.getElementById('registerConfirm').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('registerSubmitBtn').click();
+});
+
+// ----- UI UPDATE -----
+function updateUI() {
+  const greeting = document.getElementById('userGreeting');
+  const loginBtn = document.getElementById('loginBtn');
+  const registerBtn = document.getElementById('registerBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const adminNav = document.getElementById('adminNav');
+  
+  if (currentUser) {
+    greeting.style.display = 'inline';
+    greeting.textContent = `👋 ${currentUser.name}`;
+    loginBtn.style.display = 'none';
+    registerBtn.style.display = 'none';
+    logoutBtn.style.display = 'inline-flex';
+    
+    // Show/hide admin nav
+    if (currentUser.role === 'admin') {
+      adminNav.style.display = 'inline-block';
+    } else {
+      adminNav.style.display = 'none';
+    }
+  } else {
+    greeting.style.display = 'none';
+    loginBtn.style.display = 'inline-flex';
+    registerBtn.style.display = 'inline-flex';
+    logoutBtn.style.display = 'none';
+    adminNav.style.display = 'none';
+  }
+}
+
+// ----- NAVIGATION EVENTS -----
+navLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const page = this.dataset.page;
+    showPage(page);
+  });
+});
+
+// ----- LOGIN/REGISTER BUTTONS -----
+document.getElementById('loginBtn').addEventListener('click', function() {
+  document.getElementById('loginModal').classList.add('active');
+});
+
+document.getElementById('registerBtn').addEventListener('click', function() {
+  document.getElementById('registerModal').classList.add('active');
+});
+
+// ----- INIT -----
+updateUI();
+renderFeaturedProducts();
+renderAllProducts();
+renderOrders();
+
+console.log('🏆 LEGIT FURNITURE - Professional Website');
+console.log('👤 Demo Admin: admin / admin123');
+console.log('👤 Demo Client: Register with phone number');
+</script>
+
+</body>
+</html>
