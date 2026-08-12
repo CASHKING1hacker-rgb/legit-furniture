@@ -7,41 +7,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* ===== RESET & BASE ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f0ebe5; min-height: 100vh; overflow-x: hidden; position: relative; }
 
-    body {
-      background: #f0ebe5;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* ===== FLOATING PRODUCTS BACKGROUND ===== */
-    .floating-products {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.08;
-    }
-
-    .float-item {
-      position: absolute;
-      font-size: 4rem;
-      color: #5f3f28;
-      animation: floatAround 20s infinite linear;
-      opacity: 0.3;
-    }
-
+    /* ===== FLOATING PRODUCTS ===== */
+    .floating-products { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; opacity: 0.08; }
+    .float-item { position: absolute; font-size: 4rem; color: #5f3f28; animation: floatAround 20s infinite linear; opacity: 0.3; }
     .float-item:nth-child(1) { top: 5%; left: 5%; animation-duration: 22s; font-size: 5rem; }
     .float-item:nth-child(2) { top: 15%; right: 8%; animation-duration: 18s; font-size: 4.5rem; animation-delay: -3s; }
     .float-item:nth-child(3) { bottom: 20%; left: 10%; animation-duration: 25s; font-size: 6rem; animation-delay: -7s; }
@@ -50,7 +21,6 @@
     .float-item:nth-child(6) { top: 60%; right: 3%; animation-duration: 23s; font-size: 4.8rem; animation-delay: -2s; }
     .float-item:nth-child(7) { top: 25%; left: 45%; animation-duration: 30s; font-size: 7rem; animation-delay: -15s; }
     .float-item:nth-child(8) { bottom: 5%; right: 45%; animation-duration: 26s; font-size: 4.2rem; animation-delay: -8s; }
-
     @keyframes floatAround {
       0% { transform: translate(0, 0) rotate(0deg) scale(1); }
       25% { transform: translate(30px, -40px) rotate(90deg) scale(1.1); }
@@ -59,878 +29,194 @@
       100% { transform: translate(0, 0) rotate(360deg) scale(1); }
     }
 
+    /* ===== WHATSAPP FLOATING BUTTON ===== */
+    .whatsapp-float {
+      position: fixed; bottom: 2rem; right: 2rem; background: #25D366; color: #fff;
+      width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 2.2rem; box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+      z-index: 999; transition: 0.3s; text-decoration: none; animation: pulse 2s infinite;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 12px 35px rgba(37,211,102,0.6); }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .whatsapp-float .tooltip {
+      position: absolute; right: 70px; background: #2c1810; color: #fff;
+      padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; white-space: nowrap;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+    }
+    .whatsapp-float:hover .tooltip { opacity: 1; }
+
     /* ===== TOP HEADER ===== */
     .top-header {
-      background: linear-gradient(135deg, #2c1810, #4a3228);
-      color: #fff;
-      padding: 0.5rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      position: relative;
-      z-index: 10;
+      background: linear-gradient(135deg, #2c1810, #4a3228); color: #fff;
+      padding: 0.5rem 5%; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 0.5rem; position: relative; z-index: 10;
     }
+    .top-header .contact-info { display: flex; gap: 1.5rem; font-size: 0.85rem; }
+    .top-header .contact-info a { color: #e6d5c8; text-decoration: none; }
+    .top-header .social-icons a { color: #fff; margin-left: 0.8rem; font-size: 1.1rem; transition: 0.3s; }
+    .top-header .social-icons a:hover { color: #d4a88c; transform: scale(1.1); }
 
-    .top-header .contact-info {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.85rem;
-    }
-
-    .top-header .contact-info a {
-      color: #e6d5c8;
-      text-decoration: none;
-    }
-
-    .top-header .social-icons a {
-      color: #fff;
-      margin-left: 0.8rem;
-      font-size: 1.1rem;
-      transition: 0.3s;
-    }
-
-    .top-header .social-icons a:hover {
-      color: #d4a88c;
-      transform: scale(1.1);
-    }
-
-    /* ===== MAIN NAVIGATION ===== */
+    /* ===== MAIN NAV ===== */
     .main-nav {
-      background: #ffffff;
-      padding: 0.8rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: #ffffff; padding: 0.8rem 5%; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky; top: 0; z-index: 100;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #2c1810;
-      text-decoration: none;
-    }
-
-    .logo i {
-      color: #a67c5c;
-      font-size: 2.2rem;
-      animation: floatGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes floatGlow {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      color: #2c1810;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: 0.3s;
-      border: 2px solid transparent;
-    }
-
-    .nav-links a:hover {
-      background: #f0e6de;
-    }
-
-    .nav-links a.active {
-      background: #5f3f28;
-      color: #fff;
-    }
-
-    .nav-links a i {
-      margin-right: 0.4rem;
-    }
-
-    .user-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .user-actions .btn {
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .btn-login {
-      background: #f0e6de;
-      color: #2c1810;
-    }
-
-    .btn-login:hover {
-      background: #e0d2c6;
-    }
-
-    .btn-register {
-      background: #5f3f28;
-      color: #fff;
-    }
-
-    .btn-register:hover {
-      background: #4a3228;
-    }
-
-    .btn-logout {
-      background: #dc3545;
-      color: #fff;
-    }
-
-    .btn-logout:hover {
-      background: #c82333;
-    }
-
-    .user-greeting {
-      font-weight: 600;
-      color: #5f3f28;
-    }
-
-    /* ===== WHATSAPP BUTTON (Floating) ===== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #25D366;
-      color: #fff;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-      z-index: 999;
-      transition: 0.3s;
-      text-decoration: none;
-      animation: pulse 2s infinite;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-
-    .whatsapp-float .tooltip {
-      position: absolute;
-      right: 70px;
-      background: #2c1810;
-      color: #fff;
-      padding: 0.4rem 1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      opacity: 0;
-      transition: 0.3s;
-      pointer-events: none;
-    }
-
-    .whatsapp-float:hover .tooltip {
-      opacity: 1;
-    }
+    .logo { display: flex; align-items: center; gap: 0.6rem; font-size: 1.8rem; font-weight: 800; color: #2c1810; text-decoration: none; }
+    .logo i { color: #a67c5c; font-size: 2.2rem; animation: floatGlow 3s ease-in-out infinite; }
+    @keyframes floatGlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    .nav-links { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+    .nav-links a { padding: 0.5rem 1.2rem; border-radius: 30px; color: #2c1810; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; border: 2px solid transparent; }
+    .nav-links a:hover { background: #f0e6de; }
+    .nav-links a.active { background: #5f3f28; color: #fff; }
+    .nav-links a i { margin-right: 0.4rem; }
+    .user-actions { display: flex; align-items: center; gap: 0.8rem; }
+    .user-actions .btn { padding: 0.5rem 1.2rem; border-radius: 30px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .btn-login { background: #f0e6de; color: #2c1810; }
+    .btn-login:hover { background: #e0d2c6; }
+    .btn-register { background: #5f3f28; color: #fff; }
+    .btn-register:hover { background: #4a3228; }
+    .btn-logout { background: #dc3545; color: #fff; }
+    .btn-logout:hover { background: #c82333; }
+    .user-greeting { font-weight: 600; color: #5f3f28; }
 
     /* ===== PAGE CONTENT ===== */
-    .page-content {
-      max-width: 1400px;
-      margin: 1.5rem auto;
-      padding: 0 5%;
-      position: relative;
-      z-index: 5;
-    }
+    .page-content { max-width: 1400px; margin: 1.5rem auto; padding: 0 5%; position: relative; z-index: 5; }
+    .page { display: none; animation: fadeIn 0.4s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .page {
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
+    /* ===== HERO ===== */
+    .hero { background: linear-gradient(135deg, #2c1810, #5f3f28); color: #fff; padding: 3rem 2rem; border-radius: 20px; text-align: center; margin-bottom: 2rem; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 1.5rem; }
+    .hero .btn { padding: 0.8rem 2.5rem; background: #d4a88c; color: #2c1810; border: none; border-radius: 40px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
+    .hero .btn:hover { transform: scale(1.05); background: #e6c4b0; }
 
-    .page.active {
-      display: block;
-    }
+    /* ===== FEATURES ===== */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .feature-box { background: #fff; padding: 1.5rem; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e6ddd4; }
+    .feature-box i { font-size: 2.5rem; color: #5f3f28; margin-bottom: 0.5rem; }
+    .feature-box h3 { margin-bottom: 0.3rem; color: #2c1810; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ===== PRODUCTS ===== */
+    .products-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.8rem; }
+    .product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: 0.3s; border: 1px solid #ede5dc; }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+    .product-card img { width: 100%; height: 200px; object-fit: cover; background: #f5f0eb; }
+    .product-card .product-info { padding: 1rem 1.2rem 1.2rem; }
+    .product-card .product-name { font-weight: 700; font-size: 1.1rem; color: #2c1810; }
+    .product-card .product-price { color: #5f3f28; font-weight: 700; font-size: 1.3rem; margin: 0.3rem 0; }
+    .product-card .product-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+    .product-card .product-actions button { flex: 1; padding: 0.5rem; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+    .btn-order { background: #5f3f28; color: #fff; }
+    .btn-order:hover { background: #4a3228; }
+    .btn-details { background: #f0e6de; color: #2c1810; }
+    .btn-details:hover { background: #e0d2c6; }
 
-    /* ===== HOME PAGE ===== */
-    .hero {
-      background: linear-gradient(135deg, #2c1810, #5f3f28);
-      color: #fff;
-      padding: 3rem 2rem;
-      border-radius: 20px;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .hero .btn {
-      padding: 0.8rem 2.5rem;
-      background: #d4a88c;
-      color: #2c1810;
-      border: none;
-      border-radius: 40px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .hero .btn:hover {
-      transform: scale(1.05);
-      background: #e6c4b0;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .feature-box {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      border: 1px solid #e6ddd4;
-    }
-
-    .feature-box i {
-      font-size: 2.5rem;
-      color: #5f3f28;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-box h3 {
-      margin-bottom: 0.3rem;
-      color: #2c1810;
-    }
-
-    /* ===== PRODUCT GRID ===== */
-    .products-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .products-header h2 {
-      color: #2c1810;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.8rem;
-    }
-
-    .product-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      transition: 0.3s;
-      border: 1px solid #ede5dc;
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: #f5f0eb;
-    }
-
-    .product-card .product-info {
-      padding: 1rem 1.2rem 1.2rem;
-    }
-
-    .product-card .product-name {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #2c1810;
-      margin-bottom: 0.2rem;
-    }
-
-    .product-card .product-price {
-      color: #5f3f28;
-      font-weight: 700;
-      font-size: 1.3rem;
-      margin: 0.3rem 0;
-    }
-
-    .product-card .product-actions {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.8rem;
-    }
-
-    .product-card .product-actions button {
-      flex: 1;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn-order {
-      background: #5f3f28;
-      color: #fff;
-    }
-
-    .btn-order:hover {
-      background: #4a3228;
-    }
-
-    .btn-details {
-      background: #f0e6de;
-      color: #2c1810;
-    }
-
-    .btn-details:hover {
-      background: #e0d2c6;
-    }
-
-    /* ===== ORDERS PAGE ===== */
-    .orders-list {
-      background: #fff;
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .order-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid #f0e6de;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .order-item:last-child {
-      border-bottom: none;
-    }
-
-    .order-item .order-details {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .order-item .order-status {
-      padding: 0.2rem 1rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .status-pending {
-      background: #fff3cd;
-      color: #856404;
-    }
-
-    .status-shipped {
-      background: #d1ecf1;
-      color: #0c5460;
-    }
-
-    .status-delivered {
-      background: #d4edda;
-      color: #155724;
-    }
+    /* ===== ORDERS ===== */
+    .orders-list { background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .order-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid #f0e6de; flex-wrap: wrap; gap: 0.5rem; }
+    .order-item:last-child { border-bottom: none; }
+    .order-item .order-details { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .order-item .order-status { padding: 0.2rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-shipped { background: #d1ecf1; color: #0c5460; }
+    .status-delivered { background: #d4edda; color: #155724; }
 
     /* ===== ADMIN PANEL ===== */
-    .admin-panel {
-      background: #fff;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
+    .admin-panel { background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .admin-panel h2 { color: #2c1810; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
+    .admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: #f8f4f0; padding: 1.2rem; border-radius: 12px; text-align: center; }
+    .stat-card .stat-number { font-size: 2rem; font-weight: 800; color: #5f3f28; }
+    .stat-card .stat-label { color: #7a6656; font-weight: 500; }
 
-    .admin-panel h2 {
-      color: #2c1810;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    /* ===== CLIENTS TABLE ===== */
+    .clients-table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; background: #f8f4f0; border-radius: 12px; overflow: hidden; }
+    .clients-table th { background: #5f3f28; color: #fff; padding: 0.8rem 1rem; text-align: left; }
+    .clients-table td { padding: 0.7rem 1rem; border-bottom: 1px solid #ede5dc; }
+    .clients-table tr:hover { background: #f0e8e0; }
+    .contact-btn { background: #28a745; color: #fff; border: none; padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+    .contact-btn:hover { background: #218838; }
 
-    .admin-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
+    /* ===== SETTINGS FORM ===== */
+    .settings-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; background: #f8f4f0; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; }
+    .settings-form .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    .settings-form label { font-weight: 600; color: #2c1810; font-size: 0.9rem; }
+    .settings-form input { padding: 0.7rem 1.2rem; border-radius: 30px; border: 1px solid #d6c4b8; font-size: 0.95rem; background: #fff; }
+    .settings-form .btn { padding: 0.7rem 2rem; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; background: #5f3f28; color: #fff; }
+    .settings-form .btn:hover { background: #4a3228; }
 
-    .stat-card {
-      background: #f8f4f0;
-      padding: 1.2rem;
-      border-radius: 12px;
-      text-align: center;
-    }
+    .admin-form { display: flex; flex-wrap: wrap; gap: 1rem; background: #f8f4f0; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
+    .admin-form input { padding: 0.7rem 1.2rem; border-radius: 30px; border: 1px solid #d6c4b8; flex: 1 0 180px; font-size: 0.95rem; background: #fff; }
+    .admin-form .btn { padding: 0.7rem 2rem; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; background: #5f3f28; color: #fff; }
+    .admin-form .btn:hover { background: #4a3228; }
 
-    .stat-card .stat-number {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #5f3f28;
-    }
-
-    .stat-card .stat-label {
-      color: #7a6656;
-      font-weight: 500;
-    }
-
-    /* ===== CLIENTS TABLE (Admin) ===== */
-    .clients-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0 2rem;
-      background: #f8f4f0;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .clients-table th {
-      background: #5f3f28;
-      color: #fff;
-      padding: 0.8rem 1rem;
-      text-align: left;
-    }
-
-    .clients-table td {
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid #ede5dc;
-    }
-
-    .clients-table tr:hover {
-      background: #f0e8e0;
-    }
-
-    .contact-btn {
-      background: #28a745;
-      color: #fff;
-      border: none;
-      padding: 0.3rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .contact-btn:hover {
-      background: #218838;
-    }
-
-    .admin-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      background: #f8f4f0;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-    }
-
-    .admin-form input,
-    .admin-form select {
-      padding: 0.7rem 1.2rem;
-      border-radius: 30px;
-      border: 1px solid #d6c4b8;
-      flex: 1 0 180px;
-      font-size: 0.95rem;
-      background: #fff;
-    }
-
-    .admin-form .btn {
-      padding: 0.7rem 2rem;
-      border: none;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      background: #5f3f28;
-      color: #fff;
-    }
-
-    .admin-form .btn:hover {
-      background: #4a3228;
-    }
-
-    /* ===== LOCATION & CONTACT PAGE (Animated) ===== */
-    .location-contact-page {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 768px) {
-      .location-contact-page {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .location-card, .contact-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      border: 1px solid #ede5dc;
-      animation: slideUp 0.6s ease;
-      transition: 0.3s;
-    }
-
-    .location-card:hover, .contact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 35px rgba(0,0,0,0.1);
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .location-card h3, .contact-card h3 {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: #2c1810;
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .location-card i, .contact-card i {
-      color: #a67c5c;
-    }
-
-    .location-card .map-placeholder {
-      background: #f0e6de;
-      border-radius: 12px;
-      padding: 3rem 1rem;
-      text-align: center;
-      color: #7a6656;
-      margin: 1rem 0;
-      border: 2px dashed #d6c4b8;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid #f0e6de;
-    }
-
-    .contact-item:last-child {
-      border-bottom: none;
-    }
-
-    .contact-item i {
-      width: 35px;
-      height: 35px;
-      background: #f0e6de;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #5f3f28;
-    }
-
-    .contact-item a {
-      color: #2c1810;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .contact-item a:hover {
-      color: #5f3f28;
-    }
-
-    .social-links-contact {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .social-links-contact a {
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      background: #f0e6de;
-      color: #2c1810;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .social-links-contact a:hover {
-      background: #5f3f28;
-      color: #fff;
-      transform: scale(1.05);
-    }
+    /* ===== LOCATION PAGE ===== */
+    .location-contact-page { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 768px) { .location-contact-page { grid-template-columns: 1fr; } }
+    .location-card, .contact-card { background: #fff; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #ede5dc; animation: slideUp 0.6s ease; transition: 0.3s; }
+    .location-card:hover, .contact-card:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,0.1); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .location-card h3, .contact-card h3 { display: flex; align-items: center; gap: 0.6rem; color: #2c1810; margin-bottom: 1rem; font-size: 1.4rem; }
+    .location-card i, .contact-card i { color: #a67c5c; }
+    .location-card .map-placeholder { background: #f0e6de; border-radius: 12px; padding: 3rem 1rem; text-align: center; color: #7a6656; margin: 1rem 0; border: 2px dashed #d6c4b8; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid #f0e6de; }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-item i { width: 35px; height: 35px; background: #f0e6de; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #5f3f28; }
+    .contact-item a { color: #2c1810; text-decoration: none; font-weight: 500; }
+    .contact-item a:hover { color: #5f3f28; }
+    .social-links-contact { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+    .social-links-contact a { padding: 0.6rem 1.5rem; border-radius: 30px; background: #f0e6de; color: #2c1810; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .social-links-contact a:hover { background: #5f3f28; color: #fff; transform: scale(1.05); }
 
     /* ===== AUTH MODALS ===== */
-    .auth-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .auth-modal.active {
-      display: flex;
-    }
-
-    .auth-box {
-      background: #fff;
-      padding: 2.5rem;
-      border-radius: 24px;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      position: relative;
-    }
-
-    .auth-box .close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1.5rem;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #7a6656;
-      background: none;
-      border: none;
-    }
-
-    .auth-box h2 {
-      text-align: center;
-      color: #2c1810;
-      margin-bottom: 1.5rem;
-    }
-
-    .auth-box input {
-      width: 100%;
-      padding: 0.8rem 1.2rem;
-      margin: 0.5rem 0;
-      border-radius: 30px;
-      border: 1px solid #d6c4b8;
-      font-size: 1rem;
-    }
-
-    .auth-box .btn {
-      width: 100%;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 0.5rem;
-    }
-
-    .auth-box .btn-primary {
-      background: #5f3f28;
-      color: #fff;
-    }
-
-    .auth-box .btn-primary:hover {
-      background: #4a3228;
-    }
-
-    .auth-box .auth-switch {
-      text-align: center;
-      margin-top: 1rem;
-      color: #7a6656;
-    }
-
-    .auth-box .auth-switch span {
-      color: #5f3f28;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .auth-box .auth-error {
-      color: #dc3545;
-      font-size: 0.9rem;
-      text-align: center;
-      margin-top: 0.5rem;
-    }
+    .auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; justify-content: center; align-items: center; }
+    .auth-modal.active { display: flex; }
+    .auth-box { background: #fff; padding: 2.5rem; border-radius: 24px; max-width: 400px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; }
+    .auth-box .close-btn { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; color: #7a6656; background: none; border: none; }
+    .auth-box h2 { text-align: center; color: #2c1810; margin-bottom: 1.5rem; }
+    .auth-box input { width: 100%; padding: 0.8rem 1.2rem; margin: 0.5rem 0; border-radius: 30px; border: 1px solid #d6c4b8; font-size: 1rem; }
+    .auth-box .btn { width: 100%; padding: 0.8rem; border: none; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-top: 0.5rem; }
+    .auth-box .btn-primary { background: #5f3f28; color: #fff; }
+    .auth-box .btn-primary:hover { background: #4a3228; }
+    .auth-box .auth-switch { text-align: center; margin-top: 1rem; color: #7a6656; }
+    .auth-box .auth-switch span { color: #5f3f28; cursor: pointer; font-weight: 600; }
+    .auth-box .auth-error { color: #dc3545; font-size: 0.9rem; text-align: center; margin-top: 0.5rem; }
 
     /* ===== NOTIFICATION ===== */
-    .notification {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #2c1810;
-      color: #fff;
-      padding: 1rem 1.8rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      display: none;
-      align-items: center;
-      gap: 0.8rem;
-      z-index: 1000;
-      max-width: 400px;
-      animation: slideUp 0.3s ease;
-    }
+    .notification { position: fixed; bottom: 2rem; right: 2rem; background: #2c1810; color: #fff; padding: 1rem 1.8rem; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); display: none; align-items: center; gap: 0.8rem; z-index: 1000; max-width: 400px; animation: slideUp 0.3s ease; }
+    .notification.show { display: flex; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .notification .notif-close { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; margin-left: 0.5rem; }
 
-    .notification.show {
-      display: flex;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .notification .notif-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin-left: 0.5rem;
-    }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .top-header {
-        flex-direction: column;
-        text-align: center;
-        padding: 0.5rem 1rem;
-      }
-
-      .top-header .contact-info {
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-
-      .main-nav {
-        flex-direction: column;
-        padding: 0.8rem 1rem;
-      }
-
-      .nav-links {
-        justify-content: center;
-        gap: 0.2rem;
-      }
-
-      .nav-links a {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.85rem;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 1rem;
-      }
-
-      .admin-form {
-        flex-direction: column;
-      }
-
-      .admin-form input {
-        flex: 1 1 auto;
-      }
-
-      .notification {
-        bottom: 1rem;
-        right: 1rem;
-        left: 1rem;
-        max-width: none;
-      }
-
-      .clients-table {
-        font-size: 0.8rem;
-      }
-      .clients-table th,
-      .clients-table td {
-        padding: 0.4rem 0.5rem;
-      }
-
-      .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        font-size: 1.8rem;
-        bottom: 1.5rem;
-        right: 1.5rem;
-      }
+      .top-header { flex-direction: column; text-align: center; padding: 0.5rem 1rem; }
+      .top-header .contact-info { flex-direction: column; gap: 0.3rem; }
+      .main-nav { flex-direction: column; padding: 0.8rem 1rem; }
+      .nav-links { justify-content: center; gap: 0.2rem; }
+      .nav-links a { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+      .hero h1 { font-size: 2rem; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+      .admin-form { flex-direction: column; }
+      .admin-form input { flex: 1 1 auto; }
+      .notification { bottom: 1rem; right: 1rem; left: 1rem; max-width: none; }
+      .clients-table { font-size: 0.8rem; }
+      .clients-table th, .clients-table td { padding: 0.4rem 0.5rem; }
+      .whatsapp-float { width: 50px; height: 50px; font-size: 1.8rem; bottom: 1.5rem; right: 1.5rem; }
+      .settings-form { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== FLOATING PRODUCTS BACKGROUND ===== -->
+<!-- ===== FLOATING PRODUCTS ===== -->
 <div class="floating-products">
   <div class="float-item"><i class="fas fa-couch"></i></div>
   <div class="float-item"><i class="fas fa-chair"></i></div>
@@ -942,7 +228,7 @@
   <div class="float-item"><i class="fas fa-crown"></i></div>
 </div>
 
-<!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+<!-- ===== WHATSAPP BUTTON ===== -->
 <a href="https://wa.me/256701681381?text=Hello%20LEGIT%20FURNITURE%2C%20I%20want%20to%20inquire%20about%20your%20furniture%20products" 
    class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
   <i class="fab fa-whatsapp"></i>
@@ -967,7 +253,7 @@
 <nav class="main-nav">
   <a href="#" class="logo" onclick="showPage('home')">
     <i class="fas fa-crown"></i>
-    <span>LEGIT FURNITURE</span>
+    <span id="businessName">LEGIT FURNITURE</span>
   </a>
 
   <div class="nav-links">
@@ -992,8 +278,8 @@
   <!-- HOME PAGE -->
   <div class="page active" id="page-home">
     <div class="hero">
-      <h1>Premium Furniture for Your Home</h1>
-      <p>Discover handcrafted furniture that blends elegance with durability. Made with passion in MUTOONGO-KIGO.</p>
+      <h1 id="heroTitle">Premium Furniture for Your Home</h1>
+      <p id="heroText">Discover handcrafted furniture that blends elegance with durability. Made with passion in MUTOONGO-KIGO.</p>
       <button class="btn" onclick="showPage('products')"><i class="fas fa-shopping-bag"></i> Shop Now</button>
     </div>
 
@@ -1001,12 +287,12 @@
       <div class="feature-box">
         <i class="fas fa-truck"></i>
         <h3>Free Delivery</h3>
-        <p>Within MUTOONGO-KIGO area</p>
+        <p id="deliveryInfo">Within MUTOONGO-KIGO area</p>
       </div>
       <div class="feature-box">
         <i class="fas fa-shield-alt"></i>
         <h3>Quality Guarantee</h3>
-        <p>1-year warranty on all products</p>
+        <p id="warrantyInfo">1-year warranty on all products</p>
       </div>
       <div class="feature-box">
         <i class="fas fa-hand-holding-usd"></i>
@@ -1044,56 +330,51 @@
     </div>
   </div>
 
-  <!-- LOCATION & CONTACT PAGE (Separate & Animated) -->
+  <!-- LOCATION PAGE -->
   <div class="page" id="page-location">
     <h2 style="margin-bottom: 1.5rem; color: #2c1810;">
       <i class="fas fa-map-pin" style="color: #a67c5c;"></i> Location & Contact
     </h2>
     <div class="location-contact-page">
-      <!-- Location Card -->
       <div class="location-card">
         <h3><i class="fas fa-store"></i> Our Location</h3>
         <p style="color: #7a6656; margin-bottom: 0.5rem;">
-          <i class="fas fa-map-marker-alt" style="color: #5f3f28;"></i> MUTOONGO-KIGO
+          <i class="fas fa-map-marker-alt" style="color: #5f3f28;"></i> <span id="locAddress">MUTOONGO-KIGO</span>
         </p>
         <div class="map-placeholder">
           <i class="fas fa-map" style="font-size: 3rem; color: #a67c5c; display: block; margin-bottom: 0.5rem;"></i>
-          <p><strong>LEGIT FURNITURE</strong></p>
-          <p style="font-size: 0.9rem;">MUTOONGO-KIGO, Uganda</p>
+          <p><strong id="locBusinessName">LEGIT FURNITURE</strong></p>
+          <p style="font-size: 0.9rem;" id="locFullAddress">MUTOONGO-KIGO, Uganda</p>
           <p style="font-size: 0.85rem; margin-top: 0.5rem;">
-            <i class="fas fa-phone"></i> +256 701 681 381
+            <i class="fas fa-phone"></i> <span id="locPhone">+256 701 681 381</span>
           </p>
         </div>
-        <p style="font-size: 0.9rem; color: #7a6656; margin-top: 0.5rem;">
-          <i class="fas fa-clock"></i> Mon-Sat: 8:00 AM - 6:00 PM
-        </p>
       </div>
 
-      <!-- Contact Card -->
       <div class="contact-card">
         <h3><i class="fas fa-address-card"></i> Contact Us</h3>
         <div class="contact-item">
           <i class="fas fa-phone"></i>
-          <a href="tel:+256701681381">+256 701 681 381</a>
+          <a href="tel:+256701681381" id="contactPhone">+256 701 681 381</a>
         </div>
         <div class="contact-item">
           <i class="fas fa-envelope"></i>
-          <a href="mailto:info@legitfurniture.ug">info@legitfurniture.ug</a>
+          <a href="mailto:info@legitfurniture.ug" id="contactEmail">info@legitfurniture.ug</a>
         </div>
         <div class="contact-item">
           <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-          <a href="https://wa.me/256701681381" target="_blank">Chat on WhatsApp</a>
+          <a href="https://wa.me/256701681381" target="_blank" id="contactWhatsapp">Chat on WhatsApp</a>
         </div>
         <div class="contact-item">
           <i class="fas fa-map-marker-alt"></i>
-          <span>MUTOONGO-KIGO, Uganda</span>
+          <span id="contactLocation">MUTOONGO-KIGO, Uganda</span>
         </div>
 
         <div class="social-links-contact">
-          <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-          <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
-          <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="#" id="socialFacebook"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="#" id="socialInstagram"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#" id="socialTiktok"><i class="fab fa-tiktok"></i> TikTok</a>
+          <a href="#" id="socialYoutube"><i class="fab fa-youtube"></i> YouTube</a>
         </div>
       </div>
     </div>
@@ -1116,6 +397,56 @@
         <div class="stat-card">
           <div class="stat-number" id="totalClients">0</div>
           <div class="stat-label">Clients</div>
+        </div>
+      </div>
+
+      <!-- BUSINESS SETTINGS -->
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;">
+        <i class="fas fa-cog" style="color: #a67c5c;"></i> Business Settings
+      </h3>
+      <div class="settings-form" id="settingsForm">
+        <div class="form-group">
+          <label>Business Name</label>
+          <input type="text" id="setBusinessName" value="LEGIT FURNITURE" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" id="setPhone" value="+256701681381" />
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" id="setLocation" value="MUTOONGO-KIGO" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="setEmail" value="info@legitfurniture.ug" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Number</label>
+          <input type="text" id="setWhatsapp" value="+256701681381" />
+        </div>
+        <div class="form-group">
+          <label>TikTok Handle</label>
+          <input type="text" id="setTiktok" value="legitfurniture" />
+        </div>
+        <div class="form-group">
+          <label>Facebook Handle</label>
+          <input type="text" id="setFacebook" value="legitfurniture" />
+        </div>
+        <div class="form-group">
+          <label>Instagram Handle</label>
+          <input type="text" id="setInstagram" value="legitfurniture" />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Delivery Info</label>
+          <input type="text" id="setDelivery" value="Free delivery within MUTOONGO-KIGO area" />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Warranty Info</label>
+          <input type="text" id="setWarranty" value="1-year warranty on all products" />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <button class="btn" id="saveSettingsBtn"><i class="fas fa-save"></i> Save Settings</button>
         </div>
       </div>
 
@@ -1156,7 +487,6 @@
 </div>
 
 <!-- ===== AUTH MODALS ===== -->
-<!-- Login Modal -->
 <div class="auth-modal" id="loginModal">
   <div class="auth-box">
     <button class="close-btn" onclick="closeAuthModal('loginModal')">&times;</button>
@@ -1171,7 +501,6 @@
   </div>
 </div>
 
-<!-- Register Modal -->
 <div class="auth-modal" id="registerModal">
   <div class="auth-box">
     <button class="close-btn" onclick="closeAuthModal('registerModal')">&times;</button>
@@ -1180,8 +509,8 @@
     <input type="text" id="registerUsername" placeholder="Username" />
     <input type="password" id="registerPassword" placeholder="Password" />
     <input type="password" id="registerConfirm" placeholder="Confirm Password" />
-    <input type="text" id="registerPhone" placeholder="Phone Number (e.g. 0701681381)" />
-    <input type="email" id="registerEmail" placeholder="Email (optional)" />
+    <input type="text" id="registerPhone" placeholder="Phone Number" />
+    <input type="email" id="registerEmail" placeholder="Email" />
     <div class="auth-error" id="registerError"></div>
     <button class="btn btn-primary" id="registerSubmitBtn">Create Account</button>
     <div class="auth-switch">
@@ -1199,141 +528,170 @@
 
 <script>
 // ============================================================
-//  COMPLETE APPLICATION LOGIC
+//  COMPLETE APPLICATION WITH BACKEND API & localStorage
 // ============================================================
 
-// ----- DATA STORE (with localStorage persistence) -----
+// Use the correct API URL for both local and Render
+const API_BASE = (() => {
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return window.location.origin;
+  }
+  return 'http://localhost:3000';
+})();
+
+console.log('🔗 API_BASE:', API_BASE);
+
 let products = [];
 let orders = [];
 let users = [];
 let currentUser = null;
-let nextProductId = 1;
-let nextOrderId = 1;
+let settings = {};
 
-// ----- LOAD DATA FROM LOCALSTORAGE -----
-function loadData() {
+// ----- API FUNCTIONS -----
+async function apiFetch(endpoint, options = {}) {
   try {
-    const savedProducts = localStorage.getItem('legit_products');
-    const savedOrders = localStorage.getItem('legit_orders');
-    const savedUsers = localStorage.getItem('legit_users');
-    const savedProductId = localStorage.getItem('legit_nextProductId');
-    const savedOrderId = localStorage.getItem('legit_nextOrderId');
-
-    if (savedProducts) {
-      products = JSON.parse(savedProducts);
-      // Ensure each product has an id
-      products = products.filter(p => p.id !== undefined);
-    } else {
-      // Default products if no data
-      products = [
-        { id: 1, name: 'Classic Sofa', price: '850,000 UGX', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop' },
-        { id: 2, name: 'Dining Table', price: '1,200,000 UGX', image: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?w=400&h=300&fit=crop' },
-        { id: 3, name: 'Luxury Bed', price: '1,500,000 UGX', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop' },
-        { id: 4, name: 'Bookshelf', price: '620,000 UGX', image: 'https://images.unsplash.com/photo-1597019558926-3a6d8b9b2b7b?w=400&h=300&fit=crop' }
-      ];
-      nextProductId = 5;
+    console.log(`📡 Fetching: ${API_BASE}${endpoint}`);
+    const response = await fetch(`${API_BASE}${endpoint}`, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-
-    if (savedOrders) orders = JSON.parse(savedOrders);
-    if (savedUsers) users = JSON.parse(savedUsers);
-    if (savedProductId) nextProductId = parseInt(savedProductId);
-    if (savedOrderId) nextOrderId = parseInt(savedOrderId);
-
-    // Ensure admin exists
-    if (!users.find(u => u.username === 'admin')) {
-      users.push({ id: 1, name: 'Admin', username: 'admin', password: 'admin123', role: 'admin', phone: '+256701681381', email: 'admin@legitfurniture.ug' });
-    }
-
-  } catch (e) {
-    console.error('Error loading data:', e);
-    // Set default data if load fails
-    products = [
-      { id: 1, name: 'Classic Sofa', price: '850,000 UGX', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop' },
-      { id: 2, name: 'Dining Table', price: '1,200,000 UGX', image: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?w=400&h=300&fit=crop' },
-      { id: 3, name: 'Luxury Bed', price: '1,500,000 UGX', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop' },
-      { id: 4, name: 'Bookshelf', price: '620,000 UGX', image: 'https://images.unsplash.com/photo-1597019558926-3a6d8b9b2b7b?w=400&h=300&fit=crop' }
-    ];
-    nextProductId = 5;
-    orders = [];
-    users = [{ id: 1, name: 'Admin', username: 'admin', password: 'admin123', role: 'admin', phone: '+256701681381', email: 'admin@legitfurniture.ug' }];
-    saveData();
+    return await response.json();
+  } catch (error) {
+    console.error('❌ API Error:', error);
+    showNotification(`⚠️ ${error.message}`, 'error');
+    return null;
   }
 }
 
-// ----- SAVE DATA TO LOCALSTORAGE -----
-function saveData() {
+// ----- LOAD DATA FROM SERVER -----
+async function loadData() {
+  console.log('🔄 Loading data from server...');
   try {
-    localStorage.setItem('legit_products', JSON.stringify(products));
-    localStorage.setItem('legit_orders', JSON.stringify(orders));
-    localStorage.setItem('legit_users', JSON.stringify(users));
-    localStorage.setItem('legit_nextProductId', String(nextProductId));
-    localStorage.setItem('legit_nextOrderId', String(nextOrderId));
-  } catch (e) {
-    console.error('Error saving data:', e);
+    const productsData = await apiFetch('/api/products');
+    if (productsData) products = productsData;
+
+    const ordersData = await apiFetch('/api/orders');
+    if (ordersData) orders = ordersData;
+
+    const usersData = await apiFetch('/api/users');
+    if (usersData) users = usersData;
+
+    const settingsData = await apiFetch('/api/settings');
+    if (settingsData) {
+      settings = settingsData;
+      applySettings();
+    }
+
+    console.log('✅ All data loaded successfully!');
+    return true;
+  } catch (error) {
+    console.error('❌ Error loading data:', error);
+    showNotification('⚠️ Error loading data from server', 'error');
+    return false;
   }
 }
 
-// ----- DOM REFS -----
-const pages = document.querySelectorAll('.page');
-const navLinks = document.querySelectorAll('.nav-links a');
-const productGrids = {
-  featured: document.getElementById('featuredProducts'),
-  all: document.getElementById('allProducts')
-};
-const ordersList = document.getElementById('ordersList');
-const adminProductList = document.getElementById('adminProductList');
-const clientsTableBody = document.getElementById('clientsTableBody');
-
-// ----- NOTIFICATION -----
-function showNotification(message, type = 'info') {
-  const notif = document.getElementById('notification');
-  const icon = document.getElementById('notifIcon');
-  const msg = document.getElementById('notifMessage');
+// ----- APPLY SETTINGS TO UI -----
+function applySettings() {
+  if (!settings) return;
   
-  msg.textContent = message;
-  icon.className = type === 'success' ? 'fas fa-check-circle' : 
-                   type === 'error' ? 'fas fa-exclamation-circle' : 
-                   'fas fa-info-circle';
-  notif.className = 'notification show';
+  document.getElementById('businessName').textContent = settings.businessName || 'LEGIT FURNITURE';
+  document.getElementById('locBusinessName').textContent = settings.businessName || 'LEGIT FURNITURE';
   
-  setTimeout(() => hideNotification(), 5000);
+  document.getElementById('locAddress').textContent = settings.location || 'MUTOONGO-KIGO';
+  document.getElementById('locFullAddress').textContent = `${settings.location || 'MUTOONGO-KIGO'}, Uganda`;
+  document.getElementById('contactLocation').textContent = `${settings.location || 'MUTOONGO-KIGO'}, Uganda`;
+  
+  document.getElementById('locPhone').textContent = settings.phone || '+256 701 681 381';
+  document.getElementById('contactPhone').textContent = settings.phone || '+256 701 681 381';
+  document.getElementById('contactPhone').href = `tel:${(settings.phone || '+256701681381').replace(/\s/g, '')}`;
+  
+  document.getElementById('contactEmail').textContent = settings.email || 'info@legitfurniture.ug';
+  document.getElementById('contactEmail').href = `mailto:${settings.email || 'info@legitfurniture.ug'}`;
+  
+  const waNumber = settings.whatsapp || settings.phone || '+256701681381';
+  document.getElementById('contactWhatsapp').href = `https://wa.me/${waNumber.replace(/[^0-9+]/g, '')}`;
+  
+  if (settings.facebook) {
+    document.getElementById('socialFacebook').href = `https://facebook.com/${settings.facebook}`;
+  }
+  if (settings.instagram) {
+    document.getElementById('socialInstagram').href = `https://instagram.com/${settings.instagram}`;
+  }
+  if (settings.tiktok) {
+    document.getElementById('socialTiktok').href = `https://tiktok.com/@${settings.tiktok}`;
+  }
+  
+  if (settings.deliveryInfo) {
+    document.getElementById('deliveryInfo').textContent = settings.deliveryInfo;
+  }
+  if (settings.warrantyInfo) {
+    document.getElementById('warrantyInfo').textContent = settings.warrantyInfo;
+  }
+  
+  document.getElementById('setBusinessName').value = settings.businessName || '';
+  document.getElementById('setPhone').value = settings.phone || '';
+  document.getElementById('setLocation').value = settings.location || '';
+  document.getElementById('setEmail').value = settings.email || '';
+  document.getElementById('setWhatsapp').value = settings.whatsapp || settings.phone || '';
+  document.getElementById('setTiktok').value = settings.tiktok || '';
+  document.getElementById('setFacebook').value = settings.facebook || '';
+  document.getElementById('setInstagram').value = settings.instagram || '';
+  document.getElementById('setDelivery').value = settings.deliveryInfo || '';
+  document.getElementById('setWarranty').value = settings.warrantyInfo || '';
+  
+  const waBtn = document.querySelector('.whatsapp-float');
+  if (waBtn) {
+    const waNum = settings.whatsapp || settings.phone || '+256701681381';
+    waBtn.href = `https://wa.me/${waNum.replace(/[^0-9+]/g, '')}?text=Hello%20LEGIT%20FURNITURE%2C%20I%20want%20to%20inquire%20about%20your%20furniture%20products`;
+  }
 }
 
-function hideNotification() {
-  document.getElementById('notification').className = 'notification';
-}
-
-// ----- PAGE NAVIGATION -----
-function showPage(pageName) {
-  pages.forEach(p => p.classList.remove('active'));
-  navLinks.forEach(l => l.classList.remove('active'));
-  
-  const targetPage = document.getElementById(`page-${pageName}`);
-  if (targetPage) targetPage.classList.add('active');
-  
-  const navLink = document.querySelector(`.nav-links a[data-page="${pageName}"]`);
-  if (navLink) navLink.classList.add('active');
-  
-  if (pageName === 'admin' && (!currentUser || currentUser.role !== 'admin')) {
-    showNotification('⚠️ Admin access required. Please login as admin.', 'error');
-    showPage('home');
+// ----- SAVE SETTINGS -----
+async function saveSettings() {
+  if (!currentUser || currentUser.role !== 'admin') {
+    showNotification('⚠️ Admin access required', 'error');
     return;
   }
   
-  if (pageName === 'home') renderFeaturedProducts();
-  if (pageName === 'products') renderAllProducts();
-  if (pageName === 'orders') renderOrders();
-  if (pageName === 'admin') renderAdmin();
+  const newSettings = {
+    businessName: document.getElementById('setBusinessName').value.trim(),
+    phone: document.getElementById('setPhone').value.trim(),
+    location: document.getElementById('setLocation').value.trim(),
+    email: document.getElementById('setEmail').value.trim(),
+    whatsapp: document.getElementById('setWhatsapp').value.trim(),
+    tiktok: document.getElementById('setTiktok').value.trim(),
+    facebook: document.getElementById('setFacebook').value.trim(),
+    instagram: document.getElementById('setInstagram').value.trim(),
+    deliveryInfo: document.getElementById('setDelivery').value.trim(),
+    warrantyInfo: document.getElementById('setWarranty').value.trim()
+  };
+  
+  const result = await apiFetch('/api/settings', {
+    method: 'PUT',
+    body: JSON.stringify(newSettings)
+  });
+  
+  if (result && result.success) {
+    settings = result.settings;
+    applySettings();
+    showNotification('✅ Settings saved successfully!', 'success');
+  } else {
+    showNotification('⚠️ Error saving settings', 'error');
+  }
 }
 
 // ----- RENDER PRODUCTS -----
 function renderFeaturedProducts() {
-  const grid = productGrids.featured;
+  const grid = document.getElementById('featuredProducts');
   grid.innerHTML = products.slice(0, 4).map(p => createProductCard(p)).join('');
 }
 
 function renderAllProducts() {
-  const grid = productGrids.all;
+  const grid = document.getElementById('allProducts');
   grid.innerHTML = products.map(p => createProductCard(p)).join('');
   document.getElementById('productCount').textContent = `${products.length} products`;
 }
@@ -1355,7 +713,7 @@ function createProductCard(product) {
 }
 
 // ----- PLACE ORDER -----
-function placeOrder(productId) {
+async function placeOrder(productId) {
   if (!currentUser) {
     showNotification('⚠️ Please login to place an order.', 'error');
     document.getElementById('loginModal').classList.add('active');
@@ -1368,29 +726,33 @@ function placeOrder(productId) {
     return;
   }
   
-  const order = {
-    id: nextOrderId++,
+  const orderData = {
     productId: product.id,
     productName: product.name,
     price: product.price,
     image: product.image,
     client: currentUser.name,
     clientId: currentUser.id,
-    clientPhone: currentUser.phone || 'N/A',
-    date: new Date().toLocaleString(),
-    status: 'pending'
+    clientPhone: currentUser.phone || 'N/A'
   };
   
-  orders.push(order);
-  saveData();
-  renderOrders();
-  showNotification(`✅ Order placed: ${product.name} (${product.price})`, 'success');
+  const result = await apiFetch('/api/orders', {
+    method: 'POST',
+    body: JSON.stringify(orderData)
+  });
+  
+  if (result && result.success) {
+    orders.push(result.order);
+    renderOrders();
+    showNotification(`✅ Order placed: ${product.name} (${product.price})`, 'success');
+  }
 }
 
 // ----- RENDER ORDERS -----
 function renderOrders() {
+  const list = document.getElementById('ordersList');
   if (orders.length === 0) {
-    ordersList.innerHTML = `
+    list.innerHTML = `
       <p style="color: #7a6656; text-align: center; padding: 2rem 0;">
         <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
         No orders yet. Start shopping!
@@ -1402,7 +764,7 @@ function renderOrders() {
   const userOrders = currentUser && currentUser.role === 'admin' ? orders : orders.filter(o => o.clientId === currentUser?.id);
   
   if (userOrders.length === 0) {
-    ordersList.innerHTML = `
+    list.innerHTML = `
       <p style="color: #7a6656; text-align: center; padding: 2rem 0;">
         <i class="fas fa-box-open" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
         You have no orders yet.
@@ -1411,7 +773,7 @@ function renderOrders() {
     return;
   }
   
-  ordersList.innerHTML = userOrders.map(o => `
+  list.innerHTML = userOrders.map(o => `
     <div class="order-item">
       <div class="order-details">
         <img src="${o.image}" alt="${o.productName}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'">
@@ -1436,11 +798,15 @@ function renderOrders() {
   `).join('');
 }
 
-function updateOrderStatus(orderId, status) {
-  const order = orders.find(o => o.id === orderId);
-  if (order) {
-    order.status = status;
-    saveData();
+async function updateOrderStatus(orderId, status) {
+  const result = await apiFetch(`/api/orders/${orderId}`, {
+    method: 'PUT',
+    body: JSON.stringify({ status })
+  });
+  
+  if (result && result.success) {
+    const order = orders.find(o => o.id === orderId);
+    if (order) order.status = status;
     renderOrders();
     showNotification(`✅ Order #${orderId} updated to ${status}`, 'success');
   }
@@ -1448,41 +814,154 @@ function updateOrderStatus(orderId, status) {
 
 // ----- ADMIN PANEL -----
 function renderAdmin() {
+  // Check localStorage for saved user
+  if (!currentUser) {
+    const saved = localStorage.getItem('legit_currentUser');
+    if (saved) {
+      try {
+        currentUser = JSON.parse(saved);
+        updateUI();
+      } catch(e) {
+        localStorage.removeItem('legit_currentUser');
+      }
+    }
+  }
+  
   if (!currentUser || currentUser.role !== 'admin') {
     document.getElementById('page-admin').innerHTML = `
       <div class="admin-panel" style="text-align: center; padding: 3rem;">
         <i class="fas fa-lock" style="font-size: 3rem; color: #a67c5c; margin-bottom: 1rem;"></i>
         <h2>Admin Access Required</h2>
         <p style="color: #7a6656;">Please login with admin credentials.</p>
+        <button class="btn" onclick="document.getElementById('loginModal').classList.add('active')" style="margin-top: 1rem; background: #5f3f28; color: #fff; border: none; padding: 0.7rem 2rem; border-radius: 30px; cursor: pointer;">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
       </div>
     `;
     return;
   }
   
-  document.getElementById('totalProducts').textContent = products.length;
-  document.getElementById('totalOrders').textContent = orders.length;
-  document.getElementById('totalClients').textContent = users.filter(u => u.role === 'client').length;
-  
-  renderClientsTable();
-  
-  adminProductList.innerHTML = products.map(p => `
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; background: #f8f4f0; border-radius: 8px; margin-bottom: 0.3rem;">
-      <span><strong>${p.name}</strong> - ${p.price}</span>
-      <button onclick="deleteProduct(${p.id})" style="background: #dc3545; color: #fff; border: none; padding: 0.2rem 0.8rem; border-radius: 20px; cursor: pointer;">
-        <i class="fas fa-trash"></i>
-      </button>
+  // If admin, show the full panel
+  document.getElementById('page-admin').innerHTML = `
+    <div class="admin-panel">
+      <h2><i class="fas fa-shield-alt" style="color: #a67c5c;"></i> Admin Dashboard</h2>
+      
+      <div class="admin-stats">
+        <div class="stat-card">
+          <div class="stat-number">${products.length}</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${orders.length}</div>
+          <div class="stat-label">Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${users.filter(u => u.role === 'client').length}</div>
+          <div class="stat-label">Clients</div>
+        </div>
+      </div>
+
+      <!-- BUSINESS SETTINGS -->
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;">
+        <i class="fas fa-cog" style="color: #a67c5c;"></i> Business Settings
+      </h3>
+      <div class="settings-form" id="settingsForm">
+        <div class="form-group">
+          <label>Business Name</label>
+          <input type="text" id="setBusinessName" value="${settings.businessName || ''}" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" id="setPhone" value="${settings.phone || ''}" />
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" id="setLocation" value="${settings.location || ''}" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="setEmail" value="${settings.email || ''}" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Number</label>
+          <input type="text" id="setWhatsapp" value="${settings.whatsapp || settings.phone || ''}" />
+        </div>
+        <div class="form-group">
+          <label>TikTok Handle</label>
+          <input type="text" id="setTiktok" value="${settings.tiktok || ''}" />
+        </div>
+        <div class="form-group">
+          <label>Facebook Handle</label>
+          <input type="text" id="setFacebook" value="${settings.facebook || ''}" />
+        </div>
+        <div class="form-group">
+          <label>Instagram Handle</label>
+          <input type="text" id="setInstagram" value="${settings.instagram || ''}" />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Delivery Info</label>
+          <input type="text" id="setDelivery" value="${settings.deliveryInfo || ''}" />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Warranty Info</label>
+          <input type="text" id="setWarranty" value="${settings.warrantyInfo || ''}" />
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <button class="btn" id="saveSettingsBtn"><i class="fas fa-save"></i> Save Settings</button>
+        </div>
+      </div>
+
+      <!-- CLIENTS TABLE -->
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;">
+        <i class="fas fa-users" style="color: #a67c5c;"></i> Clients Details
+      </h3>
+      <div style="overflow-x: auto;">
+        <table class="clients-table" id="clientsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Orders</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="clientsTableBody"></tbody>
+        </table>
+      </div>
+
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;"><i class="fas fa-plus-circle"></i> Add New Product</h3>
+      <div class="admin-form">
+        <input type="text" id="productName" placeholder="Product Name" />
+        <input type="text" id="productPrice" placeholder="Price (e.g. 850,000 UGX)" />
+        <input type="file" id="productImage" accept="image/*" />
+        <button class="btn" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+      </div>
+
+      <h3 style="margin: 1.5rem 0 0.8rem; color: #2c1810;"><i class="fas fa-list"></i> Manage Products</h3>
+      <div id="adminProductList" style="display: grid; gap: 0.5rem;"></div>
     </div>
-  `).join('');
+  `;
+  
+  // Re-attach event listeners after re-render
+  document.getElementById('saveSettingsBtn')?.addEventListener('click', saveSettings);
+  document.getElementById('addProductBtn')?.addEventListener('click', addProduct);
+  renderClientsTable();
+  renderAdminProductList();
 }
 
 function renderClientsTable() {
   const clients = users.filter(u => u.role === 'client');
+  const tbody = document.getElementById('clientsTableBody');
+  if (!tbody) return;
+  
   if (clients.length === 0) {
-    clientsTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #7a6656;">No clients registered yet</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #7a6656;">No clients registered yet</td></tr>`;
     return;
   }
   
-  clientsTableBody.innerHTML = clients.map(c => {
+  tbody.innerHTML = clients.map(c => {
     const orderCount = orders.filter(o => o.clientId === c.id).length;
     return `
       <tr>
@@ -1498,6 +977,20 @@ function renderClientsTable() {
       </tr>
     `;
   }).join('');
+}
+
+function renderAdminProductList() {
+  const container = document.getElementById('adminProductList');
+  if (!container) return;
+  
+  container.innerHTML = products.map(p => `
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; background: #f8f4f0; border-radius: 8px; margin-bottom: 0.3rem;">
+      <span><strong>${p.name}</strong> - ${p.price}</span>
+      <button onclick="deleteProduct(${p.id})" style="background: #dc3545; color: #fff; border: none; padding: 0.2rem 0.8rem; border-radius: 20px; cursor: pointer;">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  `).join('');
 }
 
 function contactClient(phone, name) {
@@ -1518,18 +1011,22 @@ function smsClient(phone, name) {
   }
 }
 
-function deleteProduct(productId) {
+async function deleteProduct(productId) {
   if (!confirm('Delete this product?')) return;
-  products = products.filter(p => p.id !== productId);
-  saveData();
-  renderAdmin();
-  renderAllProducts();
-  renderFeaturedProducts();
-  showNotification('✅ Product deleted', 'success');
+  
+  const result = await apiFetch(`/api/products/${productId}`, {
+    method: 'DELETE'
+  });
+  
+  if (result && result.success) {
+    products = products.filter(p => p.id !== productId);
+    refreshAll();
+    showNotification('✅ Product deleted', 'success');
+  }
 }
 
-// ----- ADD PRODUCT (Admin) -----
-document.getElementById('addProductBtn').addEventListener('click', function() {
+// ----- ADD PRODUCT -----
+async function addProduct() {
   if (!currentUser || currentUser.role !== 'admin') {
     showNotification('⚠️ Admin access required', 'error');
     return;
@@ -1544,57 +1041,42 @@ document.getElementById('addProductBtn').addEventListener('click', function() {
     return;
   }
   
+  let image = 'https://via.placeholder.com/400x300/eee5dd/8b6b55?text=+';
+  
   if (file) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      products.push({
-        id: nextProductId++,
-        name: name,
-        price: price,
-        image: e.target.result
-      });
-      saveData();
-      resetAdminForm();
-      refreshAll();
-      showNotification(`✅ Product "${name}" added with image`, 'success');
-    };
-    reader.readAsDataURL(file);
-  } else {
-    products.push({
-      id: nextProductId++,
-      name: name,
-      price: price,
-      image: 'https://via.placeholder.com/400x300/eee5dd/8b6b55?text=+'
+    const promise = new Promise((resolve) => {
+      reader.onload = function(e) {
+        image = e.target.result;
+        resolve();
+      };
+      reader.readAsDataURL(file);
     });
-    saveData();
-    resetAdminForm();
+    await promise;
+  }
+  
+  const result = await apiFetch('/api/products', {
+    method: 'POST',
+    body: JSON.stringify({ name, price, image })
+  });
+  
+  if (result && result.success) {
+    products.push(result.product);
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productImage').value = '';
     refreshAll();
     showNotification(`✅ Product "${name}" added`, 'success');
+  } else {
+    showNotification('⚠️ Error adding product', 'error');
   }
-});
-
-function resetAdminForm() {
-  document.getElementById('productName').value = '';
-  document.getElementById('productPrice').value = '';
-  document.getElementById('productImage').value = '';
-}
-
-function refreshAll() {
-  renderFeaturedProducts();
-  renderAllProducts();
-  renderOrders();
-  renderAdmin();
 }
 
 // ----- AUTH SYSTEM -----
 function switchAuth(mode) {
   document.getElementById('loginModal').classList.remove('active');
   document.getElementById('registerModal').classList.remove('active');
-  if (mode === 'login') {
-    document.getElementById('loginModal').classList.add('active');
-  } else {
-    document.getElementById('registerModal').classList.add('active');
-  }
+  document.getElementById(mode === 'login' ? 'loginModal' : 'registerModal').classList.add('active');
 }
 
 function closeAuthModal(id) {
@@ -1602,27 +1084,34 @@ function closeAuthModal(id) {
 }
 
 // Login
-document.getElementById('loginSubmitBtn').addEventListener('click', function() {
+document.getElementById('loginSubmitBtn').addEventListener('click', async function() {
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
   const errorEl = document.getElementById('loginError');
   
-  const user = users.find(u => u.username === username && u.password === password);
-  if (user) {
-    currentUser = user;
+  const result = await apiFetch('/api/login', {
+    method: 'POST',
+    body: JSON.stringify({ username, password })
+  });
+  
+  if (result && result.success) {
+    currentUser = result.user;
+    localStorage.setItem('legit_currentUser', JSON.stringify(currentUser));
     closeAuthModal('loginModal');
     updateUI();
-    showNotification(`👋 Welcome back, ${user.name}!`, 'success');
+    showNotification(`👋 Welcome back, ${currentUser.name}!`, 'success');
     document.getElementById('loginUsername').value = '';
     document.getElementById('loginPassword').value = '';
     errorEl.textContent = '';
+    await loadData();
+    refreshAll();
   } else {
     errorEl.textContent = '❌ Invalid username or password';
   }
 });
 
 // Register
-document.getElementById('registerSubmitBtn').addEventListener('click', function() {
+document.getElementById('registerSubmitBtn').addEventListener('click', async function() {
   const name = document.getElementById('registerName').value.trim();
   const username = document.getElementById('registerUsername').value.trim();
   const password = document.getElementById('registerPassword').value.trim();
@@ -1639,38 +1128,35 @@ document.getElementById('registerSubmitBtn').addEventListener('click', function(
     errorEl.textContent = '❌ Passwords do not match';
     return;
   }
-  if (users.find(u => u.username === username)) {
-    errorEl.textContent = '❌ Username already exists';
-    return;
-  }
   
-  users.push({
-    id: users.length + 1,
-    name: name,
-    username: username,
-    password: password,
-    role: 'client',
-    phone: phone || 'N/A',
-    email: email || 'N/A'
+  const result = await apiFetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify({ name, username, password, phone, email })
   });
-  saveData();
   
-  closeAuthModal('registerModal');
-  showNotification(`✅ Account created! Please login.`, 'success');
-  document.getElementById('registerName').value = '';
-  document.getElementById('registerUsername').value = '';
-  document.getElementById('registerPassword').value = '';
-  document.getElementById('registerConfirm').value = '';
-  document.getElementById('registerPhone').value = '';
-  document.getElementById('registerEmail').value = '';
-  errorEl.textContent = '';
-  
-  document.getElementById('loginModal').classList.add('active');
+  if (result && result.success) {
+    closeAuthModal('registerModal');
+    showNotification(`✅ Account created! Please login.`, 'success');
+    document.getElementById('registerName').value = '';
+    document.getElementById('registerUsername').value = '';
+    document.getElementById('registerPassword').value = '';
+    document.getElementById('registerConfirm').value = '';
+    document.getElementById('registerPhone').value = '';
+    document.getElementById('registerEmail').value = '';
+    errorEl.textContent = '';
+    document.getElementById('loginModal').classList.add('active');
+    await loadData();
+  } else if (result && result.error) {
+    errorEl.textContent = `❌ ${result.error}`;
+  } else {
+    errorEl.textContent = '❌ Error creating account';
+  }
 });
 
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', function() {
   currentUser = null;
+  localStorage.removeItem('legit_currentUser');
   updateUI();
   showNotification('👋 Logged out successfully', 'info');
   showPage('home');
@@ -1698,12 +1184,7 @@ function updateUI() {
     loginBtn.style.display = 'none';
     registerBtn.style.display = 'none';
     logoutBtn.style.display = 'inline-flex';
-    
-    if (currentUser.role === 'admin') {
-      adminNav.style.display = 'inline-block';
-    } else {
-      adminNav.style.display = 'none';
-    }
+    adminNav.style.display = currentUser.role === 'admin' ? 'inline-block' : 'none';
   } else {
     greeting.style.display = 'none';
     loginBtn.style.display = 'inline-flex';
@@ -1713,35 +1194,95 @@ function updateUI() {
   }
 }
 
-// ----- NAVIGATION EVENTS -----
-navLinks.forEach(link => {
+// ----- NOTIFICATION -----
+function showNotification(message, type = 'info') {
+  const notif = document.getElementById('notification');
+  const icon = document.getElementById('notifIcon');
+  const msg = document.getElementById('notifMessage');
+  
+  msg.textContent = message;
+  icon.className = type === 'success' ? 'fas fa-check-circle' : 
+                   type === 'error' ? 'fas fa-exclamation-circle' : 
+                   'fas fa-info-circle';
+  notif.className = 'notification show';
+  
+  setTimeout(() => hideNotification(), 5000);
+}
+
+function hideNotification() {
+  document.getElementById('notification').className = 'notification';
+}
+
+// ----- PAGE NAVIGATION -----
+function showPage(pageName) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+  
+  const targetPage = document.getElementById(`page-${pageName}`);
+  if (targetPage) targetPage.classList.add('active');
+  
+  const navLink = document.querySelector(`.nav-links a[data-page="${pageName}"]`);
+  if (navLink) navLink.classList.add('active');
+  
+  if (pageName === 'admin') {
+    renderAdmin();
+  }
+  
+  if (pageName === 'home') renderFeaturedProducts();
+  if (pageName === 'products') renderAllProducts();
+  if (pageName === 'orders') renderOrders();
+}
+
+// ----- REFRESH ALL -----
+function refreshAll() {
+  renderFeaturedProducts();
+  renderAllProducts();
+  renderOrders();
+  renderAdmin();
+}
+
+// ----- NAV EVENTS -----
+document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
-    const page = this.dataset.page;
-    showPage(page);
+    showPage(this.dataset.page);
   });
 });
 
-// ----- LOGIN/REGISTER BUTTONS -----
-document.getElementById('loginBtn').addEventListener('click', function() {
+// ----- AUTH BUTTONS -----
+document.getElementById('loginBtn').addEventListener('click', () => {
   document.getElementById('loginModal').classList.add('active');
 });
 
-document.getElementById('registerBtn').addEventListener('click', function() {
+document.getElementById('registerBtn').addEventListener('click', () => {
   document.getElementById('registerModal').classList.add('active');
 });
 
 // ----- INIT -----
-loadData();
-updateUI();
-renderFeaturedProducts();
-renderAllProducts();
-renderOrders();
+async function init() {
+  // Load saved user from localStorage
+  const savedUser = localStorage.getItem('legit_currentUser');
+  if (savedUser) {
+    try {
+      currentUser = JSON.parse(savedUser);
+      console.log('🔄 Restored user from localStorage:', currentUser.name);
+    } catch (e) {
+      console.error('Error loading saved user:', e);
+      localStorage.removeItem('legit_currentUser');
+    }
+  }
+  
+  await loadData();
+  updateUI();
+  refreshAll();
+  console.log('🏆 LEGIT FURNITURE - Professional Website with Backend');
+  console.log('👤 Admin: admin / admin123');
+  console.log('💾 Data is stored on the server (persists for all users!)');
+  console.log('📞 WhatsApp: +256701681381');
+  console.log('🔄 Admin can edit location/details without coding');
+}
 
-console.log('🏆 LEGIT FURNITURE - Professional Website');
-console.log('👤 Demo Admin: admin / admin123');
-console.log('💾 Data is saved in localStorage (persists even after refresh!)');
-console.log('📞 WhatsApp: +256701681381');
+init();
 </script>
 </body>
 </html>
